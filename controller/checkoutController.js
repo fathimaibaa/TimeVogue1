@@ -11,10 +11,7 @@ const Wallet = require("../models/walletModel");
 const WalletTransaction = require("../models/walletTransactionModel");
 const Coupon = require("../models/couponModel");
 const moment=require('moment');
-/**
- * Checkout Page Route
- * Method POST
- */
+
 exports.checkoutpage = asyncHandler(async (req, res) => {
     try {
         const userid = req.user._id;
@@ -71,10 +68,6 @@ exports.checkoutpage = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Checkout Page Route
- * Method GET
- */
 
 
 
@@ -142,7 +135,7 @@ exports.placeOrder = asyncHandler(async (req, res) => {
         } 
         
         else if (payment_method === "wallet_payment") {
-            //  Wallet payment redirect
+           
             const wallet = await Wallet.findOne({ user: userId });
             wallet.balance -= newOrder.wallet;
             wallet.save();
@@ -181,7 +174,7 @@ exports.orderPlaced = asyncHandler(async (req, res) => {
        
         const userId = req.user._id;
        
-        // Populate the order details, including product details
+        
         const order = await Order.findById(orderId).populate({
             path: "orderItems",
             populate: {
@@ -233,7 +226,7 @@ exports.orderPlaced = asyncHandler(async (req, res) => {
 
         req.session.coupon = null;
 
-        // Render the order placed page with orderDetails
+        
         res.render("shop/pages/orderPlaced", {
             title: "Order Placed",
             page: "Order Placed",
@@ -247,9 +240,6 @@ exports.orderPlaced = asyncHandler(async (req, res) => {
 
 
 
-/**
- * Get Cart Data
- */
 exports.getCartData = asyncHandler(async (req, res) => {
     try {
         const userId = req.user._id;
@@ -262,10 +252,7 @@ exports.getCartData = asyncHandler(async (req, res) => {
 
 
 
-/**
- * Vefify Payment
- * Method POST
- */
+
 exports.verifyPayment = asyncHandler(async (req, res) => {
     try {
         const { razorpay_payment_id, razorpay_order_id, razorpay_signature, orderId, walletAmount, userId } = req.body;
@@ -275,7 +262,7 @@ exports.verifyPayment = asyncHandler(async (req, res) => {
             razorpay_signature,
             orderId
         );
-        console.log(result)
+       
 
         if (result) {
             const wallet = await Wallet.findOneAndUpdate(
@@ -321,10 +308,6 @@ exports.updateCheckoutPage = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Coupon Management
- * Method POST
- */
 exports.updateCoupon = asyncHandler(async (req, res) => {
     try {
         const userid = req.user._id;
@@ -389,10 +372,7 @@ exports.updateCoupon = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Remove Coupon Applied Coupon
- * Mehtod GET
- */
+
 exports.removeAppliedCoupon = asyncHandler(async (req, res) => {
     req.session.coupon = null;
     res.status(200).json("Ok");

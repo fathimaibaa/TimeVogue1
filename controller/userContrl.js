@@ -17,16 +17,16 @@ const WalletTransaction=require('../models/walletTransactionModel')
 const loadLandingPage = asyncHandler(async (req, res) => {
     try {
         const products = await Product.find({ isListed: true }).populate('images')
-    //   shuffleArray(products);
+    
 
-        console.log("home page")
+       
         res.render('./shop/pages/index',{products:products})
     } catch (error) {
         throw new Error(error)
     }
 
 })
-// loading register page---
+
 const loadRegister = async (req, res) => {
     try {
         res.render('./shop/pages/register')
@@ -35,7 +35,7 @@ const loadRegister = async (req, res) => {
     }
 }
 
-// inserting User-- 
+
 const insertUser = async (req, res) => {
     try {
         const emailCheck = req.body.email;
@@ -51,15 +51,15 @@ const insertUser = async (req, res) => {
             if (req.body.referralCode !== '') {
                 UserData.referralCode = req.body.referralCode
             }
-            console.log('data for inserting', UserData);
-
-            const OTP = generateOTP() /** otp generating **/
-
-            req.session.otpUser = { ...UserData, otp: OTP };
-            console.log(req.session.otpUser.otp)
             
 
-            /***** otp sending ******/
+            const OTP = generateOTP() 
+
+            req.session.otpUser = { ...UserData, otp: OTP };
+           
+            
+
+            
             try {
                 sendOtp(req.body.email, OTP, req.body.userName);
                 return res.redirect('/sendOTP');
@@ -72,8 +72,7 @@ const insertUser = async (req, res) => {
         throw new Error(error);
     }
 }
-/*************** OTP Section *******************/
-// loadSentOTP page Loding--
+
 const sendOTPpage = asyncHandler(async (req, res) => {
     try {
         const email = req.session.otpUser.email
@@ -84,17 +83,17 @@ const sendOTPpage = asyncHandler(async (req, res) => {
 
 })
 
-// verifyOTP route handler
+
 const verifyOTP = asyncHandler(async (req, res) => {
     try {
 
         const enteredOTP = req.body.otp;
-        const storedOTP = req.session.otpUser.otp; // Getting the stored OTP from the session
+        const storedOTP = req.session.otpUser.otp; 
         const user = req.session.otpUser;
-        console.log('stored otp', storedOTP, 'user', user);
+       
 
         if (enteredOTP == storedOTP) {
-            // if referral is found the reffered user get cashback
+            
             let userFound = null;
             if (user.referralCode && user.referralCode !== '') {
                 const referralCode = user.referralCode.trim()
@@ -126,7 +125,7 @@ const verifyOTP = asyncHandler(async (req, res) => {
             res.redirect('/login');
         } else {
             const message = 'Verification failed, please check the OTP or resend it.';
-            console.log('verification failed');
+            
             res.render('./shop/pages/verifyOTP', { errorMessage: message })
         }
     } catch (error) {
@@ -134,23 +133,21 @@ const verifyOTP = asyncHandler(async (req, res) => {
     }
 });
 
-/**********************************************/
 
-// Resending OTP---
 const reSendOTP = async (req, res) => {
     try {
-        const OTP = generateOTP() /** otp generating **/
+        const OTP = generateOTP() 
         req.session.otpUser.otp = { otp: OTP };
-        console.log( req.session.otpUser.otp)
+        
 
         const email = req.session.otpUser.email
         const userName = req.session.otpUser.userName
 
 
-        /***** otp resending ******/
+       
         try {
             sendOtp(email, OTP, userName);
-            console.log('otp is sent');
+            
             return res.render('./shop/pages/reSendOTP', { email });
         } catch (error) {
             console.error('Error sending OTP:', error);
@@ -162,18 +159,18 @@ const reSendOTP = async (req, res) => {
     }
 }
 
-// verify resendOTP--
+
 const verifyResendOTP = asyncHandler(async (req, res) => {
     try {
         const enteredOTP = req.body.otp;
-        console.log(enteredOTP);
+        
         const storedOTP = req.session.otpUser.otp;
-        console.log(storedOTP);
+        
 
         const user = req.session.otpUser;
 
         if (enteredOTP == storedOTP.otp) {
-            console.log('inside verification');
+           
 
 
             let userFound = null;
@@ -197,8 +194,8 @@ const verifyResendOTP = asyncHandler(async (req, res) => {
                     await creditforNewUser(newUser._id)
                 }
 
-                console.log('new user insert in resend page', newUser);
-            } else { console.log('error in insert user') }
+               
+            } else { }
             delete req.session.otpUser.otp;
 
             if (!userFound && user.referralCode) {
@@ -209,7 +206,7 @@ const verifyResendOTP = asyncHandler(async (req, res) => {
 
             res.redirect('/login');
         } else {
-            console.log('verification failed');
+           
         }
     } catch (error) {
         throw new Error(error);
@@ -217,7 +214,7 @@ const verifyResendOTP = asyncHandler(async (req, res) => {
 });
 
 
-// loading Login Page---
+
 const loadLogin = async (req, res) => {
     try {
         
@@ -227,7 +224,7 @@ const loadLogin = async (req, res) => {
     }
 }
 
-// forgetPassword_ email inputPage--
+
 const forgotPasswordpage = asyncHandler(async (req, res) => {
     try {
         res.render('./shop/pages/forgetPassEmail')
@@ -236,10 +233,10 @@ const forgotPasswordpage = asyncHandler(async (req, res) => {
     }
 })
 
-// sendEmail to reset password--
+
 const sendResetLink = asyncHandler(async (req, res) => {
     try {
-        console.log('use', req.body.email);
+      
         const email = req.body.email;
         const user = await User.findOne({ email: email });
 
@@ -253,7 +250,7 @@ const sendResetLink = asyncHandler(async (req, res) => {
         await user.save();
 
         const resetUrl = `${req.protocol}://${req.get("host")}/resetPassword/${resetToken}`;
-        console.log('resetUrl', resetUrl);
+      
 
         try {
             forgetPassMail(email, resetUrl, user.userName);
@@ -264,7 +261,7 @@ const sendResetLink = asyncHandler(async (req, res) => {
             user.passwordResetToken = undefined;
             user.passwordResetTokenExpires = undefined;
             console.error(error);
-            console.log("There was an error sending the password reset email, please try again later");
+           
 
             req.flash('Warning', 'Error in sending Email')
             return res.redirect("/forgetPassword");
@@ -275,7 +272,7 @@ const sendResetLink = asyncHandler(async (req, res) => {
     }
 })
 
-// Reset Password page GET
+
 const resetPassPage = asyncHandler(async (req, res) => {
     try {
 
@@ -296,17 +293,17 @@ const resetPassPage = asyncHandler(async (req, res) => {
 
 
 
-// Resetting the password-- POST
+
 const resetPassword = asyncHandler(async (req, res) => {
 
 
-console.log(" hi reached here in reset ")
+
     const token = req.params.token;
     try {
         const user = await User.findOne({ passwordResetToken: token, passwordResetTokenExpires: { $gt: Date.now() } });
 
         if (!user) {
-     console.log("her not user come")
+     
             req.flash('warning', 'Token expired or Invalid')
             res.redirect("/forgetPassword");
         }
@@ -320,7 +317,7 @@ console.log(" hi reached here in reset ")
 
         await user.save();  
 
-        console.log('password vhange', user.password)
+        
         req.flash("success", "Password changed");
         res.redirect("/login");
 
@@ -337,7 +334,7 @@ console.log(" hi reached here in reset ")
 
 
  
-// UserLogout----
+
 const userLogout = async (req, res) => {
     try {
         req.logout(function (err) {
@@ -348,19 +345,19 @@ const userLogout = async (req, res) => {
         })
         res.redirect('/')
     } catch (error) {
-        console.log(error.message);
+        
     }
 }
 
-// userProfile---
+
 const userProfile = async (req, res) => {
     try {
         const user = req.user;
-        console.log(user);
+       
         const wallet = await Wallet.findOne({ user: user._id });
         res.render('./shop/pages/profile',{user,wallet})
     } catch (error) {
-        console.log(error.message);
+        
     }
 }
 
@@ -371,7 +368,7 @@ const UpdatePassword = async (req, res) => {
         const userId = req.user.id;
         const user = await User.findById(userId);
 
-        console.log('Provided Old Password:', oldPassword);
+        
 
         if (!oldPassword) {
             return res.status(400).json({ error: 'Old password not provided' });
@@ -382,14 +379,13 @@ const UpdatePassword = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ error: 'Old password is incorrect' });
         }
-        console.log(user)
-
+       
         const saltRounds = 10;
         const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
 
         user.password = hashedNewPassword;
         await user.save();
-        console.log(user)
+        
         res.json({ message: 'Password changed successfully' });
     } catch (error) {
         console.error('Error updating password:', error);
@@ -404,9 +400,9 @@ const UpdatePassword = async (req, res) => {
 
 
 
-// Shopping Page--
+
 const shopping = asyncHandler(async (req, res) => {
-    console.log('request from unauth user ');
+   
     try {
         const user = req.user;
         const page = req.query.p || 1;
@@ -424,20 +420,20 @@ const shopping = asyncHandler(async (req, res) => {
         let cat = '6521056a158326ec6474a2ea'
 
         if (req.query.category) {
-            // Check if the category name exists in the mapping
+          
             if (categoryMapping.hasOwnProperty(req.query.category)) {
                 filter.categoryName = categoryMapping[req.query.category];
             } else {
                 filter.categoryName = cat
             }
         }
- // Check if a search query is provided
+ 
     if (req.query.search) {
     filter.$or = [
         { title: { $regex: req.query.search, $options: 'i' } },
        
     ];
-    // if search and category both included in the query parameters 
+    
     if (req.query.search && req.query.category) {
         if (categoryMapping.hasOwnProperty(req.query.category)) {
             filter.categoryName = categoryMapping[req.query.category];
@@ -449,13 +445,13 @@ const shopping = asyncHandler(async (req, res) => {
 
      let sortCriteria = {};
 
-        // Check for price sorting
+        
         if (req.query.sort === 'lowtoHigh') {
             sortCriteria.salePrice = 1;
         } else if (req.query.sort === 'highToLow') {
             sortCriteria.salePrice = -1;
         }
-        //filter by both category and price
+       
         if (req.query.category && req.query.sort) {
             if (categoryMapping.hasOwnProperty(req.query.category)) {
                 filter.categoryName = categoryMapping[req.query.category];
@@ -470,7 +466,7 @@ const shopping = asyncHandler(async (req, res) => {
                 sortCriteria.salePrice = -1;
             }
         }
-            //filter by both category and price
+           
         if (req.query.category && req.query.sort) {
          if (categoryMapping.hasOwnProperty(req.query.category)) {
         filter.categoryName = categoryMapping[req.query.category];
@@ -504,15 +500,15 @@ const shopping = asyncHandler(async (req, res) => {
             cartProductIds = null;
             userWishlist = false;
         }
-console.log(userWishlist)
+
         const count = await Product.find(filter)
-            // { categoryName: { $in: listedCategoryIds }, isListed: true })
+            
             .countDocuments();
             let selectedCategory = [];
             if (filter.categoryName) {
                 selectedCategory.push(filter.categoryName)
             }
-            console.log('selected cat',selectedCategory);
+           
     
 
         res.render('./shop/pages/shopping', {
@@ -522,7 +518,7 @@ console.log(userWishlist)
             user,
             userWishlist,
             currentPage: page,
-            totalPages: Math.ceil(count / limit), // Calculating total pages
+            totalPages: Math.ceil(count / limit),
             selectedCategory
          });
     } catch (error) {
@@ -533,7 +529,7 @@ console.log(userWishlist)
 
 
 
-// view Product Page--
+
 const viewProduct = asyncHandler(async (req, res) => {
     try {
         const id = req.params.id
@@ -575,7 +571,7 @@ const viewProduct = asyncHandler(async (req, res) => {
 
 
 
-// contact page--
+
 const contact = asyncHandler(async (req, res) => {
     try {
         res.render('./shop/pages/contact')
@@ -584,7 +580,7 @@ const contact = asyncHandler(async (req, res) => {
     }
 })
 
-// About Us----
+
 const aboutUs = asyncHandler(async (req, res) => {
     try {
         res.render('./shop/pages/aboutus')
@@ -594,24 +590,23 @@ const aboutUs = asyncHandler(async (req, res) => {
 })
 
 
-// Edit users name
-//edit profile ---
+
 async function editProfilePost(req, res) {
-    // Get the user's current information.
+    
     const userId =req.user.id;
     const user = await User.findOne({ _id: userId });
 
-    // Get the user's updated information.
+   
     const newuserName = req.body.userName;
     const newEmail = req.body.email;
 
 
-    // Update the user's information.
+   
     user.userName = newuserName;
     user.email = newEmail;
     await user.save();
 
-    // Return a success response.
+   
     res.redirect('/profile')
 }
 
@@ -640,23 +635,22 @@ const wishlist = asyncHandler(async (req, res) => {
                 path: 'images',
             },
         });
-        console.log('dsfs', userWishlist.wishlist);
+      
         res.render('./shop/pages/wishlist', { wishlist: userWishlist.wishlist ,})
     } catch (error) {
         throw new Error(error)
     }
 })
 
-// add to wishlist --
 
 const addTowishlist = asyncHandler(async (req, res) => {
     try {
         const userId = req.user.id;
         const productId = req.params.id
-        // checking if the product already existing in the wishlist
+        
         const user = await User.findById(userId);
         if (user.wishlist.includes(productId)) {
-            console.log('product found');
+            
             await User.findByIdAndUpdate(userId, { $pull: { wishlist: productId } })
             return res.json({ success: false, message: 'Product removed from wishlist' });
         }
@@ -669,7 +663,7 @@ const addTowishlist = asyncHandler(async (req, res) => {
 })
 
 
-// Remove item from wishlist
+
 const removeItemfromWishlist = asyncHandler(async (req, res) => {
     try {
         const userId = req.user.id;
@@ -683,7 +677,7 @@ const removeItemfromWishlist = asyncHandler(async (req, res) => {
 
 
 
-//--------------load forgot password ----------------------------
+
 
 const loadforgotPassword = async (req, res) => {
     try {
@@ -694,21 +688,21 @@ const loadforgotPassword = async (req, res) => {
     }
   }
   
-  // post method forgot----------------------
+  
   
   const forgotPassword =async (req, res) => {
     try {
       const email = req.body.email;
-      console.log(email);
+      co
       const user = await User.findOne({ email });
       if (!user) {
         req.flash("danger", "enter a registered email addresss");
         res.redirect("back");
       } else {
-        //generate a random reset token-------------------
+       
         const resetToken = await user.createResetPasswordToken();
         await user.save();
-        console.log(user);
+        
         const name = user.userName;
         const sendToken = await otpSetup.sendToken(email, resetToken, name);
         req.flash('success',"verify link send to the email address")
@@ -718,7 +712,7 @@ const loadforgotPassword = async (req, res) => {
       throw new Error(error);
     }
   }
-  //----------------------email check-------------------------
+  
   
   const emailcheck = async (req, res) => {
     try {
@@ -734,27 +728,27 @@ const loadforgotPassword = async (req, res) => {
     }
   }
   
-  //-------------------------reset password -----------------------------------
+ 
   
   const resetPassword1 =async (req, res) => {
     try {
-      const resetToken = req.params.id; //accessing the token
-      console.log(resetToken);
+      const resetToken = req.params.id; 
+    
   
       const passwordResetToken = crypto
         .createHash("sha256")
         .update(resetToken)
         .digest("hex");
-      console.log(passwordResetToken);
+      
       const tokenCheck = await User.findOne({ passwordResetToken });
-      console.log(tokenCheck.passwordResetTokenExpires);
+      
       const time = tokenCheck.passwordResetTokenExpires;
       if (time < Date.now()) {
-        // The reset token has expired
+       
         req.flash("danger", "the link expired,try new one");
         res.redirect("/forgotPassword");
       } else {
-        // The reset token is still valid
+        
         req.session.email = tokenCheck.email;
         res.redirect("/newPassword");
       }
@@ -763,7 +757,7 @@ const loadforgotPassword = async (req, res) => {
     }
   }
   
-  //---------------------------load the new password --------------------------------
+  
   
   const loadnewPassword =async (req, res) => {
     try {
@@ -773,7 +767,7 @@ const loadforgotPassword = async (req, res) => {
     }
   }
   
-  //---------------------------setting the new password --------------------------------
+  
   
   const newPassword = async (req, res) => {
     try {
@@ -789,7 +783,7 @@ const loadforgotPassword = async (req, res) => {
         user.passwordResetToken = undefined;
         user.passwordResetTokenExpires = undefined;
         await user.save();
-// Use express-flash to store a flash message
+
         req.flash('success', 'Password changed successfully!');
 
 
@@ -806,7 +800,7 @@ const loadforgotPassword = async (req, res) => {
     }
   }
   
-  //-----------------------changing password page --------------------
+ 
   
   const changePassword = async (req, res) => {
     try {
@@ -815,16 +809,16 @@ const loadforgotPassword = async (req, res) => {
       const resetToken = await user.createResetPasswordToken();
       await user.save();
      
-      console.log(user);
+   
       const name = user.userName;
       const sendToken = await otpSetup.sendToken(email, resetToken, name);
   
-      // Sending a response back to the client
+      
       res.status(200).json({ message: "Password change initiated successfully" });
       
       
     } catch (error) {
-      // Handle errors and send an error response
+      
       console.error(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
@@ -834,24 +828,11 @@ const loadforgotPassword = async (req, res) => {
 
 
 
-// Function to get available coupons
 
 
 
-// Sample controller for rendering the view with available coupons
-const showAvailableCoupons = async (req, res) => {
-    try {
-      // Fetch available coupons from the database
-      const availableCoupons = await Coupon.find({ isActive: true });
-  
-      // Render the view and pass the available coupons to the template
-      res.render('your-view-template', { coupons: availableCoupons });
-    } catch (error) {
-      // Handle errors, e.g., log the error and render an error page
-      console.error('Error fetching available coupons:', error);
-      res.render('error-page', { error: 'Internal Server Error' });
-    }
-  };
+
+
   
 
 
@@ -876,7 +857,7 @@ module.exports = {
     aboutUs,
    
     walletTransactionspage,
-    showAvailableCoupons,
+    
     removeItemfromWishlist,
     addTowishlist,
     wishlist,

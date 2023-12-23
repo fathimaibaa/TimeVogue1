@@ -9,7 +9,7 @@ const { status } = require("../utility/status");
 const numeral = require("numeral");
 const moment = require("moment");
 const { handleReturnedOrder, handleCancelledOrder, updateOrderStatus } = require("../helpers/admin_orderHelper");
-// Loading loginPage--   
+
 const loadLogin = expressHandler(async(req,res)=>{
 
     try {
@@ -21,7 +21,7 @@ const loadLogin = expressHandler(async(req,res)=>{
 
 
 
-// //verifyAdmin--
+
 const verifyAdmin = expressHandler(async(req,res)=>{
 
     try {
@@ -49,7 +49,7 @@ const verifyAdmin = expressHandler(async(req,res)=>{
 }) 
 
 
-// loadDashboard---  
+ 
 
 const dashboardpage = expressHandler(async (req, res) => {
     try {
@@ -104,7 +104,7 @@ const dashboardpage = expressHandler(async (req, res) => {
 
 
 
-// UserManagement-- 
+
 const userManagement = expressHandler(async(req,res)=>{
 
     try {
@@ -116,7 +116,7 @@ const userManagement = expressHandler(async(req,res)=>{
         throw new Error(error) 
     }
 }) 
-// searchUser
+
 const searchUser = expressHandler(async(req,res)=>{
 
     try {
@@ -134,7 +134,7 @@ const searchUser = expressHandler(async(req,res)=>{
         throw new Error(error) 
     }
 }) 
-// Block a User
+
 
 const blockUser = expressHandler(async (req, res) => {
     try {
@@ -142,39 +142,39 @@ const blockUser = expressHandler(async (req, res) => {
         const user = await User.findByIdAndUpdate(id, { isBlock: true }, { new: true });
 
         if (user) {
-            // Send a JSON response indicating success
+            
             res.json({ message: "User blocked successfully" });
         } else {
-            // Handle the case where the user was not found or not updated
+           
             res.status(404).json({ message: "User not found or could not be updated" });
         }
     } catch (error) {
-        // Handle any errors that occurred during the update
+        
         res.status(500).json({ message: "Error while blocking the user" });
     }
 });
 
 
-// Unblock a User
+
 const unBlockUser = expressHandler(async (req, res) => {
     try {
         const id = req.params.id;
         const user = await User.findByIdAndUpdate(id, { isBlock: false }, { new: true });
 
         if (user) {
-            // Send a JSON response indicating success
+            
             res.json({ message: "User unblocked successfully" });
         } else {
-            // Handle the case where the user was not found or not updated
+            
             res.status(404).json({ message: "User not found or could not be updated" });
         }
     } catch (error) {
-        // Handle any errors that occurred during the update
+       
         res.status(500).json({ message: "Error while unblocking the user" });
     }
 });
 
-// Admin Logout--
+
 const logout = (req, res)=>{
     try {
         req.session.admin = null;
@@ -208,14 +208,9 @@ const logout = (req, res)=>{
     }
 });
 
-/**
- * Edit Order Page Route
- * Method GET
- */
+
 const editOrder = expressHandler(async (req, res) => {
-    console.log("abcdb fghgbxdvzc")
-    console.log("abcdb fghgbxdvzc")
-    console.log("abcdb fghgbxdvzc")
+   
 
     try {
         const orderId = req.params.id;
@@ -242,17 +237,12 @@ const editOrder = expressHandler(async (req, res) => {
     }
 });
  
-/** 
- * Update Order Status
- * Method PUT
- */
+
 const updateOrderStatuss = expressHandler(async (req, res) => {
     try {
         const orderId = req.params.id;
 
-   console.log(orderId)
-   console.log(req.body.status)
-   console.log(status)
+   
    const newStatus = req.body.status
         
         const order = await OrderItem.findByIdAndUpdate(orderId, { status: newStatus })
@@ -261,7 +251,7 @@ const updateOrderStatuss = expressHandler(async (req, res) => {
         } else if (req.body.status === status.delivered) {
             order.deliveredDate = Date.now();
         }
-        console.log("2")
+       
         await order.save();
 
         if (req.body.status === status.cancelled) {
@@ -278,10 +268,7 @@ const updateOrderStatuss = expressHandler(async (req, res) => {
     }
 });
 
-/**
- * Search Order
- * Method POST
- */
+
 const searchOrder = expressHandler(async (req, res) => {
     try {
         const search = req.body.search;
@@ -297,10 +284,7 @@ const searchOrder = expressHandler(async (req, res) => {
     }
 });
 
-/**
- * Manage Coupon Page Route
- * Method GET
- */
+
 const couponspage = expressHandler(async (req, res) => {
     try {
         const messages = req.flash();
@@ -310,10 +294,7 @@ const couponspage = expressHandler(async (req, res) => {
         throw new Error(error);
     }
 });
-/**
- * Add Coupon Page Route
- * Method GET
- */
+
  const addCoupon = expressHandler(async (req, res) => {
     try {
         
@@ -323,10 +304,7 @@ const couponspage = expressHandler(async (req, res) => {
     }
 });
 
-/**
- * Create Coupon
- * Method POST
- */
+
 
 const createCoupon = expressHandler(async (req, res) => {
     try {
@@ -354,10 +332,7 @@ const createCoupon = expressHandler(async (req, res) => {
 
 
 
-/**
- * Edit Coupon page
- * Method GET
- */
+
 const editCouponPage = expressHandler(async (req, res) => {
     try {
         const couponId = req.params.id;
@@ -369,10 +344,7 @@ const editCouponPage = expressHandler(async (req, res) => {
         throw new Error(error);
     }
 });
-/**
- * Update Coupon
- * Method POST
- */
+
 const updateCoupon = expressHandler(async (req, res) => {
     try {
         const couponId = req.params.id;
@@ -401,10 +373,7 @@ const salesReportpage = expressHandler(async (req, res) => {
         throw new Error(error);
     }
 });
-/**
- * Generate Sales Report
- * Method POST
- */
+
 const generateSalesReport = async (req, res, next) => {
     try {
         const fromDate = new Date(req.query.fromDate);
@@ -423,10 +392,7 @@ const generateSalesReport = async (req, res, next) => {
     }
 };
 
-/**
- * Get Sales Data
- * Method GET
- */
+
 const getSalesData = async (req, res) => {
     try {
         const pipeline = [

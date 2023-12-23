@@ -2,7 +2,7 @@ const { validationResult, param } = require('express-validator');
 
 const validateID = [
   param('id')
-    .isMongoId() // Check if it's a valid MongoDB ObjectID
+    .isMongoId() 
     .withMessage('Invalid ID format'),
   (req, res, next) => {
     const errors = validationResult(req);
@@ -15,7 +15,7 @@ const validateID = [
 
 const adminValidateID = [
   param('id')
-    .isMongoId() // Check if it's a valid MongoDB ObjectID
+    .isMongoId() 
     .withMessage('Invalid ID format'),
   (req, res, next) => {
     const errors = validationResult(req);

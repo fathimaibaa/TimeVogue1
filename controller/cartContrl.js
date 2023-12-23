@@ -53,10 +53,6 @@ const cartpage = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Add to cart Route
- * Method GET
- */
 
 const addToCart = asyncHandler(async (req, res) => {
     const productId = req.params.id;
@@ -106,10 +102,7 @@ const addToCart = asyncHandler(async (req, res) => {
 
 
 
-/**
- * Remove From Cart Route
- * Method GET
- */
+
 const removeFromCart = asyncHandler(async (req, res) => {
     const productId = req.params.id;
     const userId = req.user.id;
@@ -127,10 +120,7 @@ const removeFromCart = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Increment Quantity Route
- * Method PUT
- */
+
 const incQuantity = asyncHandler(async (req, res) => {
     try {
         const productId = req.params.id;
@@ -143,10 +133,6 @@ const incQuantity = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Decrement Quantity Route
- * Method PUT
- */
 const decQuantity = asyncHandler(async (req, res) => {
     try {
         const productId = req.params.id;

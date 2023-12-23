@@ -20,30 +20,28 @@ userRoute.use((req, res, next) => {
 
 
 
-// userRoute setting----
-userRoute.get('/', userController.loadLandingPage); /* Loading home page */
 
-userRoute.get('/register', ensureNotAuthenticated,userController.loadRegister); /* Register Page */
+userRoute.get('/', userController.loadLandingPage); 
+
+userRoute.get('/register', ensureNotAuthenticated,userController.loadRegister); 
 userRoute.post('/register',ensureNotAuthenticated, userController.insertUser);
-userRoute.get('/sendOTP', ensureNotAuthenticated, userController.sendOTPpage); /* otp sending */
+userRoute.get('/sendOTP', ensureNotAuthenticated, userController.sendOTPpage); 
 userRoute.post('/sendOTP', ensureNotAuthenticated, userController.verifyOTP);
-userRoute.get('/reSendOTP', ensureNotAuthenticated, userController.reSendOTP); /* otp Resending */
+userRoute.get('/reSendOTP', ensureNotAuthenticated, userController.reSendOTP); 
 userRoute.post('/reSendOTP', ensureNotAuthenticated, userController.verifyResendOTP);
 
 userRoute.get('/login',  ensureNotAuthenticated, userController.loadLogin);
 userRoute.post('/login', ensureNotAuthenticated,
   passport.authenticate('local', {
-    successRedirect: '/', // Redirect on successful login
-    failureRedirect: '/login', // Redirect on failed login
-    failureFlash: true, // enable flash messages
+    successRedirect: '/', 
+    failureRedirect: '/login', 
+    failureFlash: true, 
   }));
 
 
 userRoute.get('/logout', ensureAuthenticated, userController.userLogout);
 
-// Route to get available coupons
 
-// forget-Password and reset password section
 userRoute.get('/forgetPassword', ensureNotAuthenticated, userController.forgotPasswordpage);
 userRoute.post('/forgetPassword', ensureNotAuthenticated, userController.sendResetLink);
 userRoute.get('/resetPassword/:token', ensureNotAuthenticated, userController.resetPassPage);
@@ -58,7 +56,7 @@ userRoute.get('/contact', userController.contact);
 userRoute.get('/about', userController.aboutUs);
 
 userRoute.get('/profile', ensureAuthenticated, userController.userProfile);
-// userRoute.post("/review/add/:id", userController.addReview);
+
 userRoute.post('/edit-profile', ensureAuthenticated,userController.editProfilePost);
 
 
@@ -83,7 +81,7 @@ userRoute.get("/wallet/:id", userController.walletTransactionspage);
 
 
 
-// Address_Routes__
+
 userRoute.get('/savedAddress', ensureAuthenticated, addressController.savedAddress)
 userRoute.get('/addAddress', ensureAuthenticated, addressController.addAddressPage)
 userRoute.post('/addAddress', ensureAuthenticated, addressController.insertAddress)
@@ -94,9 +92,9 @@ userRoute.get('/deleteAddress/:id', ensureAuthenticated, addressController.delet
 
 
 
-// shopping_section--- 
-userRoute.get('/shop', userController.shopping);   /* shopping page */
-userRoute.get('/viewProduct/:id',  userController.viewProduct); /* view single product */
+ 
+userRoute.get('/shop', userController.shopping);   
+userRoute.get('/viewProduct/:id',  userController.viewProduct); 
 
 
 
@@ -105,7 +103,7 @@ userRoute.get('/wishlist', ensureAuthenticated,userController.wishlist);
 userRoute.get('/addTo-wishlist/:id',  ensureAuthenticated, userController.addTowishlist);
 userRoute.get('/removeWishlist/:id', ensureAuthenticated, userController.removeItemfromWishlist);
 
-// userRoute.post("/review/add/:id", userController.addReview);
+
 userRoute.get("/wallet/:id",ensureAuthenticated, userController.walletTransactionspage);
 
 
@@ -114,7 +112,7 @@ userRoute.get("/wallet/:id",ensureAuthenticated, userController.walletTransactio
 
 
 
-// cart_section-- 
+
 userRoute.get('/cart', ensureAuthenticated, cartController.cartpage);
 userRoute.get('/cart/add/:id', ensureAuthenticated, cartController.addToCart);
 userRoute.get('/remove/:id', ensureAuthenticated, cartController.removeFromCart);
@@ -124,7 +122,7 @@ userRoute.get('/cart/dec/:id', ensureAuthenticated, cartController.decQuantity);
 
 
 
-// Order Routes
+
 userRoute.get("/orders", orderController.orderspage);
 userRoute.get("/orders/:id", orderController.singleOrder);
 userRoute.put("/orders/:id", orderController.cancelOrder);
@@ -142,7 +140,7 @@ userRoute.put("/orders/single/:id", orderController.cancelSingleOrder);
 
 
 
-//checkout routes
+
             
 userRoute.post("/checkout", checkoutController.checkoutpage);
 userRoute.get("/checkout/get", checkoutController.getCartData);
@@ -171,8 +169,8 @@ userRoute.get("/coupon/remove", checkoutController.removeAppliedCoupon);
 
 
 
-//404 notfound page--
+
 userRoute.get('*',(req,res)=>{res.render('./shop/pages/page404')})
-// 
+
 
 module.exports = userRoute;

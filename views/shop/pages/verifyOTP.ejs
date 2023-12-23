@@ -32,16 +32,14 @@
 </div>
 
 <style>
-    /* custom-style.css */
-    
-    /* Your existing CSS styles remain the same */
+   
 </style>
 
 <script>
-    // Set the initial time to 60 seconds (1 minute)
+   
     let timerSeconds = 60;
 
-    // Function to update the timer display
+   
     function updateTimer() {
         const timerElement = document.getElementById("timer");
         timerElement.textContent = `Timer: ${Math.floor(timerSeconds / 60)}:${(timerSeconds % 60)
@@ -55,10 +53,9 @@
         }
         
         else {
-            // Continue the countdown
-            // document.getElementById("otpverify").setAttribute("enabled", true); // Disable the Verify OTP button
+           
             timerSeconds--;
-            setTimeout(updateTimer, 1000); // Update the timer every 1 second
+            setTimeout(updateTimer, 1000); 
         }
     }
     updateTimer();

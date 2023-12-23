@@ -1,4 +1,4 @@
-const transporter = require('../config/emailSender'); // Import the Nodemailer transporter
+const transporter = require('../config/emailSender'); 
 
 
 function forgetPassMail(email,resetUrl,userName) {
@@ -53,7 +53,7 @@ function forgetPassMail(email,resetUrl,userName) {
     if (error) {
       console.error('Error sending mail:', error);
     } else {
-      console.log('mail sent:', info.response);
+      
     }
   });
 }

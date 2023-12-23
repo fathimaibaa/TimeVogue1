@@ -6,7 +6,7 @@ const sharp = require('sharp')
 const path = require('path')
 
 
-// productManagement list the available products--
+
 const productManagement = asyncHandler(async (req, res) => {
     try {
         const findProduct = await Product.find().populate('categoryName').populate("images");
@@ -16,7 +16,7 @@ const productManagement = asyncHandler(async (req, res) => {
     }
 })
 
-// addProduct Page---
+
 const addProduct = asyncHandler(async (req, res) => {
     try {
         const category = await Category.find({ isListed: true })
@@ -28,12 +28,12 @@ const addProduct = asyncHandler(async (req, res) => {
     }
 })
 
-// inserting a product--- 
+
 const insertProduct = asyncHandler(async (req, res) => {
     try {
         const imageUrls = []; 
 
-        // Check if req.files exists and has images
+        
         if (req.files && req.files.images.length > 0) {
             const images = req.files.images;
 
@@ -68,7 +68,7 @@ const insertProduct = asyncHandler(async (req, res) => {
                 images: imageId
             })
 
-            console.log('inserted', newProduct);
+           
             if (newProduct) {
                 res.redirect('/admin/products')
             }
@@ -83,15 +83,15 @@ const insertProduct = asyncHandler(async (req, res) => {
 
 
 
-// ListProduct---
+
 const listProduct = asyncHandler(async (req, res) => {
     try {
 
         const id = req.params.id
-        console.log(id);
+        
 
         const listing = await Product.findByIdAndUpdate({ _id: id }, { $set: { isListed: true } })
-        console.log(listing);
+       
         res.redirect('/admin/products')
 
     } catch (error) {
@@ -99,14 +99,14 @@ const listProduct = asyncHandler(async (req, res) => {
     }
 })
 
-// unlist category---
+
 const unListProduct = asyncHandler(async (req, res) => {
     try {
         const id = req.params.id
-        console.log(id);
+      
 
         const listing = await Product.findByIdAndUpdate({ _id: id }, { $set: { isListed: false } })
-        console.log(listing);
+      
         res.redirect('/admin/products')
 
     } catch (error) {
@@ -115,14 +115,13 @@ const unListProduct = asyncHandler(async (req, res) => {
 
 })
 
-// editProductPage Loading---
+
 const editProductPage = asyncHandler(async (req, res) => {
     try {
         const id = req.params.id
         const category = await Category.find({ isListed: true })
         const productFound = await Product.findById(id).populate('categoryName').populate("images");
-        console.log('images', productFound.images);
-        console.log(productFound);
+       
         if (productFound) {
             res.render('./admin/pages/editProduct', { title: 'editProduct', product: productFound, catList: category })
         }
@@ -134,7 +133,7 @@ const editProductPage = asyncHandler(async (req, res) => {
 const updateProduct = asyncHandler(async (req, res) => {
     try {
         const id = req.params.id;
-        console.log('id  body', req.body);
+      
         const updateProduct = await Product.findByIdAndUpdate({ _id: id }, req.body);
 
         res.redirect('/admin/products');
@@ -145,12 +144,12 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 })
 
-// edit image function---
+
 const editImage = asyncHandler(async (req, res) => {
     try {
         const imageId = req.params.id;
         const file = req.file;
-        console.log('file', req.file);
+      
         const imageBuffer = await sharp(file.path).resize(600, 800).toBuffer();
         const thumbnailBuffer = await sharp(file.path).resize(300, 300).toBuffer();
         const imageUrl = path.join("/admin/uploads", file.filename);
@@ -167,7 +166,7 @@ const editImage = asyncHandler(async (req, res) => {
         throw new Error(error);
     }
 });
-// Delete image using fetch
+
 const deleteImage = asyncHandler(async (req, res) => {
     try {
         const imageId = req.params.id;

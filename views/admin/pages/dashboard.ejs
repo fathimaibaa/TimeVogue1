@@ -50,9 +50,9 @@
 </div>
 
 
- <!--  Row 1 -->
+
  <div class="row">
-    <!-- Graph -->
+  
     <div class="col-lg-8">
         <div class="col-xl-12 col-lg-12">
             <div class="card mb-4">
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <!-- Graph End -->
+   
     <div class="col-lg-4 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
@@ -103,23 +103,23 @@
             var saleCtx = document.getElementById("saleChart").getContext("2d");
             var saleChart;
 
-            // Function to generate labels for the chart
+           
             function generateLabels() {
                 var labels = [];
-                for (var i = 1; i <= 52; i++) { // Assuming 52 weeks in a year
+                for (var i = 1; i <= 52; i++) {
                     labels.push("Week " + i);
                 }
                 return labels;
             }
 
-            // Function to update the chart data
+            
             function updateChart(salesData) {
                 if (saleChart) {
-                    saleChart.destroy(); // Destroy the existing chart if it exists
+                    saleChart.destroy(); 
                 }
 
-                var chartLabels = generateLabels(); // Generate week labels
-                var salesValues = salesData.map((item) => item.sales); // Extract sales values from salesData
+                var chartLabels = generateLabels(); 
+                var salesValues = salesData.map((item) => item.sales); 
 
                 saleChart = new Chart(saleCtx, {
                     type: "line",
@@ -148,11 +148,11 @@
                 });
             }
 
-            // Fetch data from the endpoint
-            fetch("/admin/sales-data-weekly") // Modify the endpoint to fetch weekly data
+            
+            fetch("/admin/sales-data-weekly")
                 .then((response) => response.json())
                 .then((data) => {
-                    updateChart(data); // Assuming the response has "sales" and "users" properties
+                    updateChart(data); 
                 })
                 .catch((error) => {
                     console.error("Error fetching data:", error);

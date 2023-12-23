@@ -14,19 +14,19 @@
                             <label class="form-label">Product title</label>
                             <input type="text" placeholder="Type here" id="title" name="title"
                                 class="form-control common-input">
-                            <div class="error-message"></div> <!-- Error message for title -->
+                            <div class="error-message"></div> 
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Description</label>
                             <textarea placeholder="Type here" class="form-control common-input" id="description"
                                 name="description" rows="2"></textarea>
-                            <div class="error-message"></div> <!-- Error message for description -->
+                            <div class="error-message"></div> 
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Colors</label>
                             <input type="text" placeholder="Type here" id="color" name="color"
                                 class="form-control common-input">
-                            <div class="error-message"></div> <!-- Error message for color -->
+                            <div class="error-message"></div> 
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Brand name</label>
@@ -41,8 +41,8 @@
                             <div class="error-message"></div>
                         </div>
                         
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
+                    </div>
+                </div>
 
                 <hr class="mb-4 mt-0">
                 <div class="row">
@@ -82,8 +82,8 @@
                             <input type="text" placeholder="₹" name="salePrice" id="salePrice" class="form-control">
                             <div class="error-message"></div> 
                         </div>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
+                    </div> 
+                </div> 
 
                 <hr class="mb-4 mt-0">
 
@@ -97,24 +97,11 @@
                             <input type="text" placeholder="No's" name="quantity" id="quantity" class="form-control">
                             <div class="error-message"></div> 
                         </div>
-                    </div> <!-- col.// -->
-                </div> <!-- row.// -->
+                    </div> 
+                </div> 
                 <hr class="mb-4 mt-0">
 
-                <!-- <div class="row"> -->
-
-                    <!-- <div class="col-md-3">
-                        <h6>5. Media</h6>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="card p-md-5 p-2 me-md-5">
-                            <h5>Choose product images </h5>
-                            <div class="form-group mt-2">
-                                <input type="file" class="form-control " name="images" id="image" accept="image/*"
-                                    multiple>
-                                    <div class="error-message"></div> 
-                            </div>
-                        </div> -->
+               
 
 
 
@@ -164,10 +151,10 @@
 
         if (imageInput && imagePreviewContainer) {
             imageInput.addEventListener('change', function () {
-                // Clear previous previews
+              
                 imagePreviewContainer.innerHTML = '';
 
-                // Display previews for each selected image
+                
                 for (const file of imageInput.files) {
                     const reader = new FileReader();
 
@@ -176,7 +163,7 @@
                         imgElement.src = e.target.result;
                         imgElement.alt = 'Image Preview';
                         imgElement.className = 'img-thumbnail mr-2';
-                        imgElement.style.width = '100px'; // Set a fixed width for the preview
+                        imgElement.style.width = '100px'; 
 
                         imagePreviewContainer.appendChild(imgElement);
                     };
@@ -188,16 +175,16 @@
         
           applyCropBtn.addEventListener('click', function () {
             if (cropper) {
-              // Get the cropped data (base64 format)
+              
               const croppedData = cropper.getCroppedCanvas().toDataURL();
         
-              // Clear previous hidden input
+              
               const previousHiddenInput = document.getElementById('croppedImage');
               if (previousHiddenInput) {
                 previousHiddenInput.remove();
               }
         
-              // Add a new hidden input with the cropped data
+
               const hiddenInput = document.createElement('input');
               hiddenInput.type = 'hidden';
               hiddenInput.id = 'croppedImage';
@@ -205,33 +192,30 @@
               hiddenInput.value = croppedData;
               document.getElementById('cropContainer').appendChild(hiddenInput);
         
-              // You can also update the mainImage input value if needed
-              // document.getElementById('mainImage').value = croppedData;
-        
-              // Hide the crop container
+              
               container.style.display = 'none';
             }
           });
         
           if (imageInput && imagePreviewContainer) {
             imageInput.addEventListener('change', function () {
-              // Clear previous previews
+              
               imagePreviewContainer.innerHTML = '';
         
-              // Display previews for each selected image
+             
               for (const file of imageInput.files) {
                 const imgElement = document.createElement('img');
                 imgElement.src = URL.createObjectURL(file);
                 imgElement.alt = 'Image Preview';
                 imgElement.className = 'img-thumbnail mr-2';
-                imgElement.style.width = '100px'; // Set a fixed width for the preview
+                imgElement.style.width = '100px'; 
         
                 imagePreviewContainer.appendChild(imgElement);
               }
             });
           }
         
-          // Append the image element to the container
+         
           container.appendChild(image);
         });
         </script>

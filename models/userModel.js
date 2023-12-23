@@ -53,7 +53,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isPasswordMatched = async function (enteredPassword) {
-    // Checking for matching password
+    
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
@@ -76,7 +76,7 @@ userSchema.methods.createResetPasswordToken = async function () {
       .update(resetToken)
       .digest("hex");
     this.passwordResetTokenExpires = Date.now() + 1 * 60 * 1000;
-    console.log(resetToken, this.passwordResetTokenExpires);
+   
     return resetToken;
   };
 
@@ -90,7 +90,7 @@ userSchema.methods.createResetPasswordToken = async function () {
 
 
 userSchema.methods.addToCart = async function (productId, quantity) {
-    const product = await Product.findById(productId); // Find the product by its ID
+    const product = await Product.findById(productId); 
     if (!product) {
         throw new Error('Product not found');
     }
@@ -102,26 +102,26 @@ userSchema.methods.addToCart = async function (productId, quantity) {
     const existingCartItem = this.cart.find(item => item.product.equals(product._id));
 
     if (existingCartItem) {
-        // If the product already exists in the cart, update the quantity
-        existingCartItem.quantity += quantity; // Increment the quantity
+        
+        existingCartItem.quantity += quantity; 
     } else {
-        // this.cart.push({ product: product._id, quantity }); // If not in the cart, add as a new item
+        
         this.cart.push({ product: product._id, quantity: 1 });
     }
 
     await this.save();
-    return true; // Successfully updated cart
+    return true; 
 };
 
 
 userSchema.methods.removeFromCart = function (productId) {
-    // Remove an item from the cart by product ID
+    
     this.cart = this.cart.filter(item => !item.product.equals(productId));
     return this.save();
 };
 
 userSchema.methods.clearCart = function () {
-    // Clear the entire cart
+   
     this.cart = [];
     return this.save();
 };

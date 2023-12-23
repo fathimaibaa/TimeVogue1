@@ -1,14 +1,13 @@
 (function ($) {
     "use strict";
 
-    /*Sale statistics Chart*/
+   
     if ($('#myChart').length) {
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
-            // The type of chart we want to create
+            
             type: 'line',
             
-            // The data for our dataset
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
@@ -48,9 +47,7 @@
                 }
             }
         });
-    } //End if
-
-    /*Sale statistics Chart*/
+    } 
     if ($('#myChart2').length) {
         var ctx = document.getElementById("myChart2");
         var myChart = new Chart(ctx, {
@@ -99,6 +96,6 @@
                 }
             }
         });
-    } //end if
+    } 
     
 })(jQuery);

@@ -1,9 +1,5 @@
 
-// const errorMessage = document.getElementById('error-message');
 
-// const hide = (element) => {
-//     element.style.display = 'none';
-// }
 function displayError(inputField, message) {
     const errorMessage = inputField.nextElementSibling;
     if (errorMessage && errorMessage.classList.contains('error-message')) {
@@ -15,7 +11,7 @@ function displayError(inputField, message) {
     }
 }
 
-// Function to hide the error message
+
 function hideError(inputField) {
     const errorMessage = inputField.nextElementSibling;
     errorMessage.textContent = "";
@@ -35,21 +31,21 @@ function validateProductForm() {
 
     if (productPriceInput.value < 1) {
         displayError(productPriceInput, "Product price Cannot be less be 1 rupees");
-        return false; // Prevent form submission
+        return false; 
     }
     if (salePriceInput.value < 0) {
         displayError(salePriceInput, " Sale price Cannot be less than  1 rupees");
-        return false; // Prevent form submission
+        return false; 
     }
     if (quantityInput.value < 0) {
         displayError(quantityInput, " Quantity Cannot be less be 1 or negative value");
-        return false; // Prevent form submission
+        return false; 
     }
 
-// added 
+
 if (isNaN(quantityInput.value) || quantityInput.value < 1) {
     displayError(quantityInput, "Quantity must be a numeral greater than or equal to 1");
-    return false; // Prevent form submission
+    return false; 
 }
 
 
@@ -57,58 +53,44 @@ if (isNaN(quantityInput.value) || quantityInput.value < 1) {
 
     if (titleInput.value.trim() === '') {
         displayError(titleInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
 
 
     
     if (descriptionInput.value.trim() === '') {
         displayError(descriptionInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
     if (colorInput.value.trim() === '') {
         displayError(colorInput, "Field is required");
-        return false; // Prevent form submission
+        return false;
     }
     if (brandInput.value.trim() === '') {
         displayError(brandInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
     if (categoryInput.value.trim() === '') {
         displayError(categoryInput, "Field is required");
-        return false; // Prevent form submission
+        return false;
     }
     if (productPriceInput.value.trim() === '') {
         displayError(productPriceInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
     if (salePriceInput.value.trim() == '') {
         displayError(salePriceInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
     if (quantityInput.value.trim() == '') {
         displayError(quantityInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
     if (imageInput.value.trim() === '') {
         displayError(imageInput, "Field is required");
-        return false; // Prevent form submission
+        return false; 
     }
-    // const selectedFiles = imageInput.files;
-    // const maxImageCount = 4;
-    // const allowedExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
-    // if (selectedFiles.length > maxImageCount) {
-    //     displayError(imageInput, `You can only upload up to ${maxImageCount} images.`);
-        // return false; // Prevent form submission
-    // }
-
-    // for (const file of selectedFiles) {
-    //     const fileExtension = file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2);
-    //     if (!allowedExtensions.includes(`.${fileExtension.toLowerCase()}`)) {
-    //         displayError(imageInput, "Invalid file type. Only PNG, JPG, and WebP images are allowed.");
-    //         return false; // Prevent form submission
-    //     }
-    // }
+    
 
 
     return true;

@@ -118,13 +118,13 @@ a {
 
     var menuLinks = document.querySelectorAll('.menu-link');
 
-    // Loop through the menu links to find the active one
+   
     menuLinks.forEach(function (menuLink) {
         var href = menuLink.getAttribute('data-url');
 
-        // Check if the current path matches the data-url attribute
+        
         if (path === href) {
-            // Add the "active" class to the menu item
+            
             menuLink.parentElement.classList.add('active');
         }
     });

@@ -16,7 +16,7 @@
         <% } %>
         <h2>WELCOME ADMIN!</h2><br>
         <form id="loginForm" action="#" method="post">
-          <!-- Email input -->
+          
           <div class="form-outline mb-4">
             <label class="form-label" for="form1Example13">Email address</label>
             <input type="email" id="form1Example13" name="email" value=""
@@ -25,7 +25,7 @@
             <div id="emailError" class="text-danger"></div>
           </div>
 
-          <!-- Password input -->
+       
           <div class="form-outline mb-4">
             <label class="form-label" for="form1Example23">Password</label>
             <input type="password" id="form1Example23" name="password" value=""
@@ -34,7 +34,7 @@
             <div id="passwordError" class="text-danger"></div>
           </div>
 
-          <!-- Submit button -->
+        
           <button type="submit" id="submitButton" class="btn btn-primary btn-lg btn-block" disabled>Sign in</button>
         </form>
       </div>
@@ -66,7 +66,7 @@
   setTimeout(hide, 3000);
 </script>
 <script>
-  // Get form and input elements
+  
   const form = document.getElementById("loginForm");
   const emailInput = form.querySelector('input[name="email"]');
   const passwordInput = form.querySelector('input[name="password"]');
@@ -74,15 +74,15 @@
   const passwordError = document.getElementById("passwordError");
   const submitButton = document.getElementById("submitButton");
 
-  // Regular expression for validating email
+ 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // Function to check if an email is valid
+  
   function isValidEmail(email) {
     return emailRegex.test(email);
   }
 
-  // Function to validate the form
+  
   function validateForm() {
     let valid = true;
 
@@ -100,20 +100,20 @@
       passwordError.textContent = "";
     }
 
-    // Enable or disable the submit button based on validity
+    
     submitButton.disabled = !valid;
 
     return valid;
   }
 
-  // Add blur event listeners for input fields
+  
   emailInput.addEventListener("blur", validateForm);
   passwordInput.addEventListener("blur", validateForm);
 
-  // Add submit event listener to the form
+  
   form.addEventListener("submit", function (e) {
     if (!validateForm()) {
-      e.preventDefault(); // Prevent form submission if it's invalid
+      e.preventDefault(); 
     }
   });
 </script>

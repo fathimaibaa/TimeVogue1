@@ -1,5 +1,5 @@
 
-<!-- shopping-cart-area end -->
+
 <div class="breadcrumb-area" style="background-color: black; color: white;">
   <div class="container">
       <div class="breadcrumb-content text-center pt-1">
@@ -21,8 +21,6 @@
 </style>
 
 
-<!-- shopping-cart-area start -->
-<!-- shopping-cart-area start -->
 <div class="cart-main-area pt-95 pb-100">
   <div class="container">
     <div class="row">
@@ -61,7 +59,7 @@
                         class="img-thumbnail"
                       />
                       <% } else { %>
-                      <!-- Handle the case where thumbnailUrl is not available -->
+                      
                       <img
                         src="placeholder-thumbnail-url.jpg"
                         alt="Placeholder"
@@ -82,16 +80,7 @@
                     <p class="text-danger">Out of Stock</p>
                     <% } %>
                   </td>
-                  <!-- <td class="product-price-cart">
-                    <span
-                      >₹
-                      <span class="amount">
-                        <% const
-                        productPrice=parseFloat(product.product.salePrice) %>
-                        <%= productPrice.toFixed(2) %>
-                      </span>
-                    </span>
-                  </td> -->
+                 
 
                   <td class="text-center">
                     <div class="btn-group" role="group" aria-label="Quantity">
@@ -129,7 +118,7 @@
                     const productQuantity=parseInt(product.quantity, 10); %> <%
                     const totalProductPrice=productTotal * productQuantity; %>
                     <%= totalProductPrice.toFixed(2) %> <% } else { %>
-                    <!-- Handle the case where product information is not available -->
+                   
                     ₹0.00 <% } %>
                   </td>
                 </tr>
@@ -197,4 +186,3 @@
     </div>
   </div>
 </div>
-<!-- shopping-cart-area end -->

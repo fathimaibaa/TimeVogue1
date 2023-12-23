@@ -3,10 +3,6 @@ const User = require("../models/userModel");
 const validateMongoDbId = require("../utility/validateMongodbId");
 const { roles } = require("../utility/constants");
 
-/**
- * Customers Page Route
- * Method GET
- */
 exports.customerpage = asyncHandler(async (req, res) => {
     try {
         const messages = req.flash();
@@ -17,10 +13,7 @@ exports.customerpage = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * View a Customer Page Route
- * Method GET
- */
+
 exports.viewCustomer = asyncHandler(async (req, res) => {
     try {
         const messages = req.flash();
@@ -33,10 +26,7 @@ exports.viewCustomer = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Block Customer
- * Method PUT
- */
+
 exports.blockCustomer = asyncHandler(async (req, res) => {
     const id = req.params.id;
     validateMongoDbId(id);
@@ -62,10 +52,6 @@ exports.blockCustomer = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Unblock Customer
- * Method PUT
- */
 exports.unblockCustomer = asyncHandler(async (req, res) => {
     const id = req.params.id;
     validateMongoDbId(id);
@@ -91,10 +77,7 @@ exports.unblockCustomer = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Update Role
- * Method PUT
- */
+
 exports.updateRole = asyncHandler(async (req, res) => {
     const id = req.params.id;
     validateMongoDbId(id);

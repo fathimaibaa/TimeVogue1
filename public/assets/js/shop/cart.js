@@ -5,12 +5,12 @@ const checkoutBtn = document.getElementById("checkoutBtn");
 function updateCartMessage(data) {
   const cartMessage = document.getElementById("cart-message");
 
-  // Update the cart message
+ 
   cartMessage.innerHTML = data.message;
   cartMessage.className = `position-fixed bg-${data.status} text-white p-2 rounded`;
   cartMessage.style.display = "block";
 
-  // Hide the cart message after 3 seconds
+ 
   setTimeout(function () {
     cartMessage.style.display = "none";
   }, 3000);
@@ -19,7 +19,7 @@ function updateCartMessage(data) {
 function updateCartCount(data) {
   const cartCount = document.getElementById("cartCount");
 
-  // Update the cart count (if available)
+  
   if (data.count !== undefined) {
     cartCount.innerText = data.count;
   }
@@ -31,7 +31,7 @@ function updateQuantityDisplay(id, data) {
     `totalProductPrice_${id}`
   );
 
-  // Update the quantity displayed in the <span> element
+ 
   if (quantitySpan) {
     quantitySpan.innerText = data.quantity;
     totalProductPrice.innerText = data.productTotal.toFixed(2);
@@ -109,7 +109,7 @@ minusButtons.forEach((button) => {
 
 
 function addToCart(id) {
-  console.log("in the add to cart ")
+ 
   const productId = id;
   const url = `/cart/add/${productId}`;
   const cartCount = document.getElementById("cartCount");
@@ -120,18 +120,18 @@ function addToCart(id) {
   })
       .then((response) => {
           if (response.ok) {
-              console.log("json response is sending ")
+            
               return response.json();
           } else {
-              console.log("json response is sending failed")
+             
               console.error("Failed");
           }
       })
       .then((data) => {
           if (data) {
               if (data.count && data.message) {
-                  console.log("json response is sending in the kunji box  ")
-                  // cartCount.innerText = data.count;
+                 
+                  
                   cartMessage.innerText = data.message;
 
                   cartMessage.className = `position-fixed bg-${data.status} text-white p-2 rounded`;

@@ -9,10 +9,7 @@ const {
 } = require("../helpers/orderHelper");
 const OrderItem = require("../models/orderItemModel");
 const moment=require('moment');
-/**
- * Orders Page Route
- * Method GET
- */
+
 
 
 exports.orderspage = asyncHandler(async (req, res) => {
@@ -31,10 +28,7 @@ exports.orderspage = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Checkout Page Route
- * Method GET
- */
+
 exports.singleOrder = asyncHandler(async (req, res) => {
     try {
         const orderId = req.params.id;
@@ -54,10 +48,7 @@ exports.singleOrder = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Cancel Order Route
- * Method PUT
- */
+
 exports.cancelOrder = asyncHandler(async (req, res) => {
     try {
         const orderId = req.params.id;
@@ -74,10 +65,6 @@ exports.cancelOrder = asyncHandler(async (req, res) => {
     }
 });
 
-/**
- * Cancel Single Order Route
- * Method PUT
- */
 exports.cancelSingleOrder = asyncHandler(async (req, res) => {
     try {
         const orderItemId = req.params.id;

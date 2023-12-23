@@ -21,7 +21,7 @@ const { notFound, errorHandler } = require('./middlewares/errorHandler');
 const multer=require('multer');
 const sharp=require('sharp');
 
-// using functions--
+
 const app = express();
 dataBase.dbConnect();
 
@@ -54,7 +54,7 @@ app.use(
     })
 );
 
-// using for sending message to ejs
+
 app.use(connectFlash());
 app.use((req, res, next) => {
     res.locals.messages = req.flash()
@@ -64,12 +64,12 @@ app.use((req, res, next) => {
 
 
 
-// for passport authentication
+
 app.use(passport.initialize())
 app.use(passport.session())
 require('./utility/passportAuth')
 
-// for user session activity checking
+
 app.use((req, res, next) => {
     res.locals.user = req.user;
     next()
@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 
 
 
-// view engine setup
+
 app.use(express.static("public"));
 app.use("/admin", express.static(__dirname + "public/admin"));
 
@@ -86,26 +86,23 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
-// // Use method-override middleware
+
 app.use(methodOverride('_method'));
 
 
 
 
-// UserRoutes-----
+
 app.use('/admin', adminRoute)
 app.use('/', userRoute);
-// AdminRoutes---
 
 
-
-// error Handling---
 app.use(notFound);
 app.use(errorHandler);
 
 
 
-// server setup--
+
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server Started on http://localhost:${process.env.PORT}`)

@@ -12,7 +12,7 @@ function displayError(field, message, timeout = 3000) {
   const errorElement = document.getElementById(field + '-error');
   if (errorElement) {
     errorElement.textContent = message;
-    errorElement.style.color = 'red'; // Set text color to red
+    errorElement.style.color = 'red'; 
     errorElement.style.display = 'block';
     setTimeout(() => hide(errorElement), timeout);
   }
@@ -25,33 +25,30 @@ function validateForm() {
   const email = document.getElementById('user-email').value;
   const password = document.getElementById('user-password').value;
   const repassword = document.getElementById('user-repassword').value;
-  // const mobile = document.getElementById('user-mobile').value;
+  
 
-  // const mobilePattern = /^[0-9]{10}$/;
+ 
   const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[\W_]).{8,}$/;
   const nameRegex = /^[A-Z][a-zA-Z]{3,}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // const mobileError = document.getElementById('mobile-error');
+  
   const passwordError = document.getElementById('password-error');
   const nameError = document.getElementById('name-error');
   const emailError = document.getElementById('email-error');
   const repasswordError = document.getElementById('repassword-error');
 
-  // mobileError.textContent = '';
+  
   passwordError.textContent = '';
   nameError.textContent = '';
   emailError.textContent = '';
   repasswordError.textContent = '';
 
-  // const mobileInput = document.getElementById('user-mobile');
+ 
 
   let hasErrors = false;
 
-  // if (!mobilePattern.test(mobileInput.value)) {
-  //   displayError('mobile', 'Please enter a valid 10-digit mobile number.');
-  //   hasErrors = true;
-  // }
+  
 
   if (!passwordRegex.test(password)) {
     displayError(

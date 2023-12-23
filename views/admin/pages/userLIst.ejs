@@ -60,12 +60,12 @@
 
 
 
-<!-- Edit User Modal -->
+
 <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <!-- Similar structure as the Add User Modal -->
+    
 </div>
 
-<!-- Include Bootstrap JS (jQuery and Popper.js required) -->
+
 
 <script>
     $(document).ready(function () {
@@ -77,8 +77,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 function getConfirmation(userId) {
-    console.log("This is user id", userId);
-
+   
     Swal.fire({
         title: "Block User ?",
         text: "Are you sure to block",
@@ -92,28 +91,27 @@ function getConfirmation(userId) {
                 url: "/admin/user/blockUser/" + userId,
                 method: 'post',
                 success: (response) => {
-                    console.log("Response from server:", response); // Add this line for debugging
-                    console.log(response.message)
+                    
                     if (response.message) {
-                        console.log("User Blocked Successfully"); // Add this line for debugging
+                       
 
-                        // Show a success message immediately
+                       
                         Swal.fire({
                             title: "User Blocked",
                             text: "User Blocked Successfully",
                             icon: "success",
                         });
 
-                        // Then reload the page after a short delay
+                        
                         setTimeout(() => {
                             location.reload();
                         }, 2000);
                     } else {
-                        console.log("Error");
+                       
                     }
                 },
                 error: (error) => {
-                    console.error("Error during the AJAX request:", error); // Add this line for debugging
+                    console.error("Error during the AJAX request:", error); 
                 }
             });
         }
@@ -122,7 +120,7 @@ function getConfirmation(userId) {
 </script>
 <script>
 function showConfirmation(userId) {
-    console.log("This is user id", userId);
+    
 
     Swal.fire({
         title: "unblock User ?",
@@ -137,28 +135,25 @@ function showConfirmation(userId) {
                 url: "/admin/user/unblockUser/" + userId,
                 method: 'post',
                 success: (response) => {
-                    console.log("Response from server:", response); // Add this line for debugging
-                    console.log(response.message)
+                    
                     if (response.message) {
-                        console.log("User Blocked Successfully"); // Add this line for debugging
-
-                        // Show a success message immediately
+                        
                         Swal.fire({
                             title: "User unBlocked",
                             text: "User Blocked Successfully",
                             icon: "success",
                         });
 
-                        // Then reload the page after a short delay
+                        
                         setTimeout(() => {
                             location.reload();
                         }, 2000);
                     } else {
-                        console.log("Error");
+                       
                     }
                 },
                 error: (error) => {
-                    console.error("Error during the AJAX request:", error); // Add this line for debugging
+                    console.error("Error during the AJAX request:", error); 
                 }
             });
         }

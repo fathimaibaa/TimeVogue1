@@ -86,11 +86,11 @@ const decrementQuantity = async (userId, productId, res) => {
     const productToDecrement = updatedCart.products.find((item) => item.product.equals(productId));
 
     if (productToDecrement) {
-        // Check if quantity is greater than 1 before decrementing
+       
         if (productToDecrement.quantity > 1) {
             productToDecrement.quantity -= 1;
         } else {
-            // If quantity is already 1, do not decrease
+            
             const cart = await Cart.findOne({ user: userId }).populate("products.product");
             const { subtotal, total } = calculateCartTotals(cart.products);
             const product = await findProductById(productId);

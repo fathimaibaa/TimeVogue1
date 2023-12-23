@@ -37,8 +37,8 @@
                                     id="brand" name="brand">
                                 <div class="error-message"></div>
                             </div>
-                        </div> <!-- col.// -->
-                    </div> <!-- row.// -->
+                        </div> 
+                    </div>
 
                     <hr class="mb-4 mt-0">
                     <div class="row">
@@ -81,8 +81,8 @@
                                     id="salePrice" class="form-control">
                                 <div class="error-message"></div>
                             </div>
-                        </div> <!-- col.// -->
-                    </div> <!-- row.// -->
+                        </div> 
+                    </div> 
 
                     <hr class="mb-4 mt-0">
 
@@ -97,8 +97,8 @@
                                     id="quantity" class="form-control">
                                 <div class="error-message"></div>
                             </div>
-                        </div> <!-- col.// -->
-                    </div> <!-- row.// -->
+                        </div> 
+                    </div> 
 
 
                     
@@ -158,7 +158,7 @@
                 confirmButtonText: "Yes, Remove",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If the user confirms, trigger the removal function
+                    
                     removeImage(imageId);
                 }
             });
@@ -169,7 +169,7 @@
                     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="/admin/assets/js/admin/addProductValidation.js"></script>
                 <script>
-                    // Function to handle file input change and update preview
+                   
                     const updateImageButtons = document.querySelectorAll(".update-image-button");
 
                     function handleFileInputChange(index) {
@@ -180,7 +180,7 @@
                         fileInput.addEventListener("change", (event) => {
 
                             const selectedFiles = fileInput.files;
-            const maxImageCount = 5; // Change this to your desired maximum image count
+            const maxImageCount = 5; 
             const allowedExtensions = ['.png', '.jpg', '.jpeg', '.webp'];
 
             if (selectedFiles.length > maxImageCount) {
@@ -213,11 +213,11 @@
                 submitButton.setAttribute("disabled", "disabled");
             }
         });
-                        // Trigger the hidden file input
+                       
                         fileInput.click();
                     }
 
-                    // Add event listeners to all update image buttons
+                    
                     updateImageButtons.forEach((button, index) => {
                         button.addEventListener("click", (event) => {
                             handleFileInputChange(index);
@@ -274,7 +274,7 @@
                         })
                             .then((response) => {
                                 if (response.ok) {
-                                    console.log("Image removed successfully");
+                                   
                                     location.reload();
                                     return response.json();
                                 } else {
@@ -288,10 +288,10 @@
                 </script>
 
                 <script>
-                    // JavaScript to handle image preview
+                   
                     document.getElementById("newImages").addEventListener("change", function () {
                         const previewContainer = document.getElementById("previewNewImages");
-                        previewContainer.innerHTML = ""; // Clear previous previews
+                        previewContainer.innerHTML = ""; 
 
                         const files = this.files;
                         for (let i = 0; i < files.length; i++) {
@@ -305,9 +305,8 @@
                                 img.style.maxWidth = "150px";
 
                                 const previewDiv = document.createElement("div");
-                                previewDiv.style.position = "relative"; // Make the container relative for absolute positioning
-
-                                // Create a remove button (X) for each image
+                                previewDiv.style.position = "relative"; 
+                               
                                 const removeButton = document.createElement("button");
                                 removeButton.innerText = "X";
                                 removeButton.classList.add(
@@ -320,7 +319,7 @@
                                 removeButton.style.top = "0";
                                 removeButton.style.left = "0";
                                 removeButton.addEventListener("click", function () {
-                                    previewDiv.remove(); // Remove the preview when the button is clicked
+                                    previewDiv.remove(); 
                                 });
 
                                 previewDiv.appendChild(img);
@@ -332,7 +331,7 @@
                             reader.readAsDataURL(file);
                         }
 
-                        // Enable the "Upload Images" button
+                       
                         document.getElementById("submitNewImages").removeAttribute("disabled");
                     });
                 </script>

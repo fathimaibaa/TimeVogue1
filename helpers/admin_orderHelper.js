@@ -9,7 +9,7 @@ async function handleOrderPayment(order, orders) {
 
     if (orders.coupon) {
         const appliedCoupon = orders.coupon;
-        console.log(appliedCoupon);
+       
         let amountToBeRefunded = 0;
         if (appliedCoupon.type === "fixedAmount") {
             const percentage = Math.round((orderTotal / (orders.totalPrice + orders.discount)) * 100);

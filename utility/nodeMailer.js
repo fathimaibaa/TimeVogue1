@@ -1,5 +1,4 @@
-const transporter = require('../config/emailSender'); // Import the Nodemailer transporter
-
+const transporter = require('../config/emailSender'); 
 function generateOTP() {
     const min = 1000;
     const max = 9999;
@@ -64,7 +63,7 @@ function generateOTP() {
       if (error) {
         console.error('Error sending OTP:', error);
       } else {
-        console.log('OTP sent:', info.response);
+        
       }
     });
   }

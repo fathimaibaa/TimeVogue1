@@ -57,7 +57,7 @@ module.exports = {
                 return item.isPaid === "pending" ? false : true;
             })
         ) {
-            // Update product quantities and sold counts for each order item
+            
             for (const item of order.orderItems) {
                 const orderItem = await OrderItem.findByIdAndUpdate(item._id, {
                     status: status.cancelled,
@@ -69,13 +69,13 @@ module.exports = {
                 await cancelledProduct.save();
             }
 
-            // Update the order status
+           
             order.status = status.cancelled;
             const updatedOrder = await order.save();
 
             return updatedOrder;
         } else if (order.payment_method === "cash_on_delivery") {
-            // Update product quantities and sold counts for each order item
+            
             for (const item of order.orderItems) {
                 await OrderItem.findByIdAndUpdate(item._id, {
                     status: status.cancelled,
@@ -87,7 +87,7 @@ module.exports = {
                 await cancelledProduct.save();
             }
 
-            // Update the order status
+           
             order.status = status.cancelled;
             await order.save();
 

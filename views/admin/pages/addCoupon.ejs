@@ -170,7 +170,7 @@
             expiryDateError.innerText = "";
             const expiryDate = new Date(expiryDateInput.value);
             const currentDate = new Date();
-            console.log(expiryDate.value);
+           
             if (expiryDate.value === "") {
                 expiryDate.innerText = "Expiry Date is Required";
             } else if (isNaN(expiryDate.getTime()) || expiryDate < currentDate) {
@@ -230,7 +230,7 @@
 
         submitForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            console.log(isValid);
+           
             if (isValid) {
                 submitForm.submit();
             } else {

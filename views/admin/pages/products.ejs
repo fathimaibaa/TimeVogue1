@@ -74,12 +74,12 @@
                                 icon: "success",
                             });
 
-                            // Then reload the page after a short delay
+                            
                             setTimeout(() => {
                                 location.reload();
                             }, 2000);
                         } else {
-                            console.log("Error");
+                           
                         }
                     },
                     error: (error) => {
@@ -91,7 +91,7 @@
     }
 
     $(document).ready(function () {
-        // Attach the confirmation function to the buttons
+        
         $('.block-button').click(function () {
             let productId = $(this).data('product-id');
             getConfirmation(productId, 'list');

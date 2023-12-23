@@ -72,7 +72,7 @@
                 if (response.ok) {
                     return response.json();
                 } else {
-                    console.log("Something Went wrong");
+                   
                 }
             })
             .then((data) => {
@@ -100,8 +100,8 @@
         for (const key in data[0]) {
             if (data[0].hasOwnProperty(key)) {
                 const th = document.createElement("th");
-                th.textContent = key.toUpperCase(); // Capitalize the heading
-                th.style.textAlign = "center"; // Center align the header
+                th.textContent = key.toUpperCase();
+                th.style.textAlign = "center"; 
                 headerRow.appendChild(th);
             }
         }

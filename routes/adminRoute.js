@@ -43,12 +43,12 @@ adminRoute.use((req, res, next) => {
 })
 adminRoute.use(nocache())
 
-// admin loginManagement---
+
 adminRoute.get('/', isAdminLoggedOut, adminController.loadLogin)
 adminRoute.post('/', adminController.verifyAdmin);
 adminRoute.get('/logout', isAdminLoggedIn, adminController.logout)
 
-// adminController.userManagement---
+
 
 adminRoute.get("/dashboard",isAdminLoggedIn, adminController.dashboardpage);
 
@@ -57,7 +57,7 @@ adminRoute.post('/user/search', isAdminLoggedIn, adminController.searchUser)
 adminRoute.post('/user/blockUser/:id', adminValidateID, isAdminLoggedIn, adminController.blockUser)
 adminRoute.post('/user/unBlockUser/:id', adminValidateID,isAdminLoggedIn, adminController.unBlockUser)
 
-// categoryManagement--- 
+
 adminRoute.get('/category', isAdminLoggedIn, categoryController.categoryManagement)
 adminRoute.get('/addCategory', isAdminLoggedIn, categoryController.addCategory)
 adminRoute.post('/addCategory', isAdminLoggedIn, categoryController.insertCategory)
@@ -67,12 +67,12 @@ adminRoute.get('/editCategory/:id',adminValidateID, isAdminLoggedIn, categoryCon
 adminRoute.post('/editCategory/:id',adminValidateID, isAdminLoggedIn, categoryController.updateCategory)
 adminRoute.post('/category/search',adminValidateID, isAdminLoggedIn, categoryController.searchCategory)
 
-// Product Management---
+
 adminRoute.get('/product/addProduct', isAdminLoggedIn, productController.addProduct)
  
 adminRoute.post('/product/addProduct',
          upload.fields([{ name: "images" }]),
-    productController.insertProduct)  /** Product adding and multer using  **/
+    productController.insertProduct) 
 adminRoute.get('/products', isAdminLoggedIn, productController.productManagement)
 adminRoute.post('/product/list/:id',adminValidateID, isAdminLoggedIn, productController.listProduct)
 adminRoute.post('/product/unList/:id',adminValidateID, isAdminLoggedIn, productController.unListProduct)
@@ -82,7 +82,7 @@ adminRoute.put('/product/edit-image/:id', adminValidateID,upload.single("image")
      productController.editImage)
 adminRoute.delete('/product/delete-image/:id',adminValidateID, productController.deleteImage)
 
-// OrderManagement--
+
 
 
 adminRoute.get("/orders",isAdminLoggedIn, adminController.ordersPage);
@@ -92,7 +92,7 @@ adminRoute.post("/orders/search", isAdminLoggedIn,adminController.searchOrder);
 
 
 
-// Coupon Management---
+
 
 adminRoute.get("/coupons", isAdminLoggedIn,adminController.couponspage);
 adminRoute.get("/coupon/add", isAdminLoggedIn,adminController.addCoupon);

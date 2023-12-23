@@ -8,7 +8,7 @@
             <% address.forEach((element, index)=> { %>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <!-- Card Header with Edit and Delete buttons -->
+                        
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="card-title">Address <%= index + 1 %>
                             </h5>
@@ -86,7 +86,7 @@
                 confirmButtonText: 'Yes'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If the user clicks "Yes," redirect to the removeProduct endpoint
+                    
                     window.location.href = "/deleteAddress/" + addressId;
                 }
             });

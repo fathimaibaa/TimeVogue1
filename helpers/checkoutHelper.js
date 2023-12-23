@@ -1,4 +1,4 @@
-// orderHelper.js
+
 
 const asyncHandler = require("express-async-handler");
 const Address = require("../models/addressModel");
@@ -10,16 +10,11 @@ const { generateUniqueOrderID } = require("../utility/generateUniqueId");
 const Crypto = require("crypto");
 const Wallet = require("../models/walletModel");
 
-/**
- * Get user's cart items
- */
 exports.getCartItems = asyncHandler(async (userId) => {
     return await Cart.findOne({ user: userId }).populate("products.product");
 });
 
-/**
- * Calculate the total price of cart items
- */
+
 exports.calculateTotalPrice = asyncHandler(async (cartItems, userid, payWithWallet, coupon) => {
     const wallet = await Wallet.findOne({ user: userid });
     let subtotal = 0;
@@ -85,9 +80,6 @@ exports.calculateTotalPrice = asyncHandler(async (cartItems, userid, payWithWall
     }
 });
 
-/**
- * Place an order
- */
 exports.placeOrder = asyncHandler(async (userId, addressId, paymentMethod, isWallet, coupon) => {
     const cartItems = await exports.getCartItems(userId);
 
@@ -131,7 +123,7 @@ exports.placeOrder = asyncHandler(async (userId, addressId, paymentMethod, isWal
     const address = await Address.findById(addressId);
 
     const existingOrderIds = await Order.find().select("orderId");
-    // Create the order
+   
     const newOrder = await Order.create({
         orderId: "OD" + generateUniqueOrderID(existingOrderIds),
         user: userId,
@@ -151,9 +143,7 @@ exports.placeOrder = asyncHandler(async (userId, addressId, paymentMethod, isWal
     return newOrder;
 });
 
-/**
- * Verify payment using Razorpay
- */
+
 exports.verifyPayment = asyncHandler(async (razorpay_payment_id, razorpay_order_id, razorpay_signature, orderId) => {
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = Crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET).update(sign.toString()).digest("hex");

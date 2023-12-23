@@ -2,7 +2,6 @@ const category = require('../models/categoryModel')
 const expressHandler = require('express-async-handler')
 
 
-// category page-- 
 const categoryManagement = expressHandler(async (req, res) => {
     try {
         const messages = req.flash();
@@ -13,7 +12,7 @@ const categoryManagement = expressHandler(async (req, res) => {
     }
 })
 
-// addCategory form---
+
 const addCategory = expressHandler(async (req, res) => {
     try {
         const messages = req.flash();
@@ -23,10 +22,10 @@ const addCategory = expressHandler(async (req, res) => {
     }
 })
 
-// inserting  categories--
+
 const insertCategory = expressHandler(async (req, res) => {
     try {
-        // const messages = req.flash();
+        
         const categoryName = req.body.addCategory;
         const regexCategoryName = new RegExp(`^${categoryName}$`, 'i');
         const findCat = await category.findOne({ categoryName: regexCategoryName });
@@ -52,15 +51,15 @@ const insertCategory = expressHandler(async (req, res) => {
 });
 
 
-// list category--
+
 const list = expressHandler(async (req, res) => {
     try {
 
         const id = req.params.id
-        console.log(id);
+       
 
         const listing = await category.findByIdAndUpdate({ _id: id }, { $set: { isListed: true } })
-        console.log(listing);
+       
         res.redirect('/admin/category')
 
     } catch (error) {
@@ -68,14 +67,14 @@ const list = expressHandler(async (req, res) => {
     }
 })
 
-// unlist category---
+
 const unList = expressHandler(async (req, res) => {
     try {
         const id = req.params.id
-        console.log(id);
+       
 
         const listing = await category.findByIdAndUpdate({ _id: id }, { $set: { isListed: false } })
-        console.log(listing);
+       
         res.redirect('/admin/category')
 
     } catch (error) {
@@ -86,7 +85,7 @@ const unList = expressHandler(async (req, res) => {
 
 
 
-// searchcCategory----
+
 const searchCategory = expressHandler(async (req, res) => {
     
     try {
@@ -105,7 +104,7 @@ const searchCategory = expressHandler(async (req, res) => {
 })
 
 
-// edit Category form --
+
 const editCategory = expressHandler(async (req, res) => {
 
     try {
@@ -114,7 +113,7 @@ const editCategory = expressHandler(async (req, res) => {
         if (catName) {
             res.render('./admin/pages/editCategory', { title: 'editCategory', values: catName });
         } else {
-            console.log('error in rendering');
+           
         }
     } catch (error) {
         throw new Error(error)

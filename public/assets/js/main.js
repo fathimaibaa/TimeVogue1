@@ -2,15 +2,13 @@
     "use strict";
     
     
-    /* jQuery MeanMenu */
+   
     $('#mobile-menu-active').meanmenu({
         meanScreenWidth: "991",
         meanMenuContainer: ".mobile-menu-area .mobile-menu",
     });
     
-    /*--
-    One Page Nav
-    -----------------------------------*/
+   
     var top_offset = $('.header-area').height() - -60;
     $('.hamburger-menu nav ul').onePageNav({
         currentClass: 'active',
@@ -18,9 +16,9 @@
     });
     
     
-    /*--- clickable menu active ----*/
+   
     const slinky = $('#menu').slinky()
-    /*====== sidebarmenu ======*/
+    
     function sidebarMainmenu() {
         var menuTrigger = $('.clickable-mainmenu-active'),
             endTrigger = $('button.clickable-mainmenu-close'),
@@ -36,7 +34,7 @@
     sidebarMainmenu();
     
     
-    /* slider active */
+  
     $('.slider-active').owlCarousel({
         loop: true,
         nav: false,
@@ -66,7 +64,7 @@
         autoplayTimeout: 5000,
         animateOut: 'fadeOut',
         animateIn: 'fadeIn',
-        // navText: ['<img src="assets/img/icon-img/57.png"> next', 'prev <img src="assets/img/icon-img/58.png">'],
+        
         item: 1,
         responsive: {
             0: {
@@ -82,7 +80,7 @@
     })
     
     
-    /* arrival active */
+   
     $('.arrival-active').owlCarousel({
         loop: true,
         autoplay: false,
@@ -107,7 +105,7 @@
     })
     
     
-    /* brand logo active */
+    
     $('.brand-logo-active').owlCarousel({
         loop: true,
         nav: false,
@@ -132,7 +130,7 @@
     })
     
     
-    /* brand logo active */
+   
     $('.brand-logo-active2').owlCarousel({
         loop: true,
         nav: false,
@@ -154,7 +152,7 @@
     })
     
     
-    /* book list active */
+    
     $('.book-list-active').owlCarousel({
         loop: true,
         nav: true,
@@ -178,7 +176,7 @@
     })
     
     
-    /* testimonials active */
+   
     $('.testimonials-active').owlCarousel({
         loop: true,
         nav: false,
@@ -202,7 +200,7 @@
     })
     
     
-    /* testimonials active */
+    
     $('.brand-logo-active3').owlCarousel({
         loop: true,
         nav: false,
@@ -224,7 +222,7 @@
             }
         }
     })
-    /* testimonials active */
+    
     $('.product-fruit-slider').owlCarousel({
         loop: true,
         nav: false,
@@ -251,7 +249,7 @@
         }
     })
     
-    /* instafeed active */
+    
     $('.instafeed-active').owlCarousel({
         loop: true,
         nav: false,
@@ -276,7 +274,7 @@
     })
     
     
-    /* testimonials active */
+    
     $('.special-food-active').owlCarousel({
         loop: true,
         nav: false,
@@ -301,7 +299,7 @@
     })
     
     
-    /* testimonials active */
+    
     $('.smart-watch-product-active').owlCarousel({
         loop: true,
         nav: false,
@@ -326,7 +324,7 @@
     })
     
     
-    /* testimonials active */
+   
     $('.related-product-active').owlCarousel({
         loop: true,
         nav: false,
@@ -351,7 +349,7 @@
     })
     
     
-    /* popular-product-active active */
+   
     $('.popular-product-active').owlCarousel({
         loop: true,
         nav: true,
@@ -377,7 +375,7 @@
     })
     
     
-    /* popular-product-active-2 active */
+   
     $('.popular-product-active-2').owlCarousel({
         loop: true,
         nav: true,
@@ -403,7 +401,7 @@
     })
     
     
-    /* trandy-product-active active */
+  
     $('.trandy-product-active').owlCarousel({
         loop: true,
         nav: false,
@@ -428,7 +426,7 @@
     })
     
     
-    /* feadback-silder-active active */
+   
     $('.feadback-silder-active').owlCarousel({
         loop: true,
         nav: false,
@@ -453,15 +451,13 @@
     })
     
     
-    /*category left menu*/
+    
     $('.category-heading-2').on('click', function() {
         $('.category-menu-list').slideToggle(300);
     });
     
     
-    /*--
-    menu-toggle
-    ------------------------*/
+   
     $('.menu-toggle').on('click', function() {
         if ($('.menu-toggle').hasClass('is-active')) {
             $('.hamburger-menu nav').removeClass('menu-open');
@@ -471,9 +467,7 @@
     });
     
     
-    /*--
-    	Hamburger js
-    -----------------------------------*/
+    
     var forEach = function(t, o, r) {
         if ("[object Object]" === Object.prototype.toString.call(t))
             for (var c in t) Object.prototype.hasOwnProperty.call(t, c) && o.call(r, t[c], c, t);
@@ -491,7 +485,7 @@
     }
     
     
-    /* magnificPopup video popup */
+   
     $('.video-popup').magnificPopup({
         type: 'iframe',
         mainClass: 'mfp-fade',
@@ -503,9 +497,6 @@
     });
     
     
-    /*----------------------------
-        text-animation
-    ------------------------------ */
     $('.tlt1').textillate({
         loop: true,
         in: {
@@ -516,9 +507,7 @@
         },
     });
     
-    /*--
-    Menu Stick
-    -----------------------------------*/
+    
     $(window).on('scroll', function() {
         var scroll = $(window).scrollTop();
         if (scroll < 1) {
@@ -528,7 +517,7 @@
         }
     });
     
-    /* hover 3d init for tilt */
+    
     if ($('.tilter').length > 0) {
         $('.tilter').tilt({
             maxTilt: 40,
@@ -540,7 +529,7 @@
         });
     }
     
-    /* hover 3d init for tilt */
+   
     if ($('.tilter-2').length > 0) {
         $('.tilter-2').tilt({
             maxTilt: 20,
@@ -552,7 +541,7 @@
         });
     }
     
-    /* hover 3d init for tilt */
+   
     if ($('.tilter-3').length > 0) {
         $('.tilter-3').tilt({
             maxTilt: 20,
@@ -565,33 +554,31 @@
     }
     
     
-    /*--- showlogin toggle function ----*/
+    
     $('#showlogin').on('click', function() {
         $('#checkout-login').slideToggle(900);
     });
     
-    /*--- showlogin toggle function ----*/
+   
     $('#showcoupon').on('click', function() {
         $('#checkout_coupon').slideToggle(900);
     });
     
-    /*--- showlogin toggle function ----*/
+   
     $('#cbox').on('click', function() {
         $('#cbox_info').slideToggle(1000);
     });
     
-    /*--- showlogin toggle function ----*/
+    
     $('#ship-box').on('click', function() {
         $('#ship-box-info').slideToggle(1000);
     });
     
-    // Instantiate EasyZoom instances
+    
     var $easyzoom = $('.easyzoom').easyZoom();
     
     
-    /*---------------------
-    sidebar sticky
-    --------------------- */
+   
     $('.sidebar-active').stickySidebar({
         topSpacing: 80,
         bottomSpacing: 30,
@@ -610,15 +597,14 @@
         minWidth: 991,
     });
     
-    /* isotop active */
-    // filter items on button click
+    
     $('.blog-mesonry').imagesLoaded(function() {
-        // init Isotope
+       
         var $grid = $('.grid').isotope({
             itemSelector: '.grid-item',
             percentPosition: true,
             masonry: {
-                // use outer width of grid-sizer for columnWidth
+                
                 columnWidth: '.grid-item',
             }
         });
@@ -628,10 +614,7 @@
         $('.notification-section').slideUp();
     });
     
-    
-    /*----------------------------
-    	Cart Plus Minus Button
-    ------------------------------ */
+   
     $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
     $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
     $(".qtybutton").on("click", function() {
@@ -640,7 +623,7 @@
         if ($button.text() == "+") {
             var newVal = parseFloat(oldValue) + 1;
         } else {
-            // Don't allow decrementing below zero
+            
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
@@ -650,9 +633,6 @@
         $button.parent().find("input").val(newVal);
     });
     
-    /*---------------------
-    price slider
-    --------------------- */
     var sliderrange = $('#slider-range');
     var amountprice = $('#amount');
     $(function() {
@@ -669,9 +649,7 @@
             " - $" + sliderrange.slider("values", 1));
     });
     
-    /*--------------------------
-        09. ScrollUp
-    ---------------------------- */
+    
     $.scrollUp({
         scrollText: '<i class="ti-arrow-up"></i>',
         easingType: 'linear',
@@ -681,9 +659,7 @@
     
     
     
-    /*---------------------
-    countdown
-  --------------------- */
+    
     $('[data-countdown]').each(function() {
 		var $this = $(this), finalDate = $(this).data('countdown');
 		$this.countdown(finalDate, function(event) {
@@ -691,12 +667,10 @@
 		});
     });
     
-    /*------ Wow Active ----*/
+  
     new WOW().init();
     
-    /*--
-	Header Search Toggle
-    -----------------------------------*/
+   
     var searchToggle = $('.search-toggle');
     searchToggle.on('click', function(){
         if($(this).hasClass('open')){
