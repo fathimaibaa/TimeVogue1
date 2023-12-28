@@ -111,7 +111,7 @@ const userManagement = expressHandler(async(req,res)=>{
      
         const findUsers = await User.find();
             
-        res.render('./admin/pages/userList',{users:findUsers,title:'UserList'})
+        res.render('./admin/pages/userLIst',{users:findUsers,title:'UserLIst'})
     } catch (error) {
         throw new Error(error) 
     }
@@ -124,9 +124,9 @@ const searchUser = expressHandler(async(req,res)=>{
         const  data = req.body.search
         const searching = await User.find({userName:{$regex: data , $options: 'i' }});
         if(searching){
-             res.render('./admin/pages/userList',{users:searching,title:'Search'})
+             res.render('./admin/pages/userLIst',{users:searching,title:'Search'})
         }else{
-            res.render('./admin/pages/userList',{title:'Search'})
+            res.render('./admin/pages/userLIst',{title:'Search'})
         }
             
        
