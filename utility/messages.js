@@ -94,7 +94,7 @@ tokenMsg:`
 </head>
 <body>
     <div class="container">
-        <h2>Forgot Your Password?</h2>
+        <h2>Change Your Password?</h2>
         <p>Hello  ${name},</p>
         <p>We received a request to reset your password. If you did not make this request, please ignore this email.</p>
         <p>To reset your password, click the following link:</p>

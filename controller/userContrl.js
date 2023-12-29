@@ -784,7 +784,7 @@ const loadforgotPassword = async (req, res) => {
         user.passwordResetTokenExpires = undefined;
         await user.save();
 
-        req.flash('success', 'Password changed successfully!');
+        // req.flash('success', 'Password changed successfully!');
 
 
 
@@ -792,7 +792,7 @@ const loadforgotPassword = async (req, res) => {
         res.redirect("/login");
       
       } else {
-        req.flash('error', 'Some internal error');
+        // req.flash('error', 'Some internal error');
       res.redirect("/login");
       }
     } catch (error) {
