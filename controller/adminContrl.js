@@ -51,56 +51,56 @@ const verifyAdmin = expressHandler(async(req,res)=>{
 
  
 
-const dashboardpage = expressHandler(async (req, res) => {
-    try {
-        const messages = req.flash();
-        const user = req?.user;
-        const recentOrders = await Order.find()
-            .limit(5)
-            .populate({
-                path: "user",
-                select: "firstName lastName image",
-            })
-            .populate("orderItems")
-            .select("totalAmount orderedDate totalPrice")
-            .sort({ _id: -1 });
+// const dashboardpage = expressHandler(async (req, res) => {
+//     try {
+//         const messages = req.flash();
+//         const user = req?.user;
+//         const recentOrders = await Order.find()
+//             .limit(5)
+//             .populate({
+//                 path: "user",
+//                 select: "firstName lastName image",
+//             })
+//             .populate("orderItems")
+//             .select("totalAmount orderedDate totalPrice")
+//             .sort({ _id: -1 });
 
-        let totalSalesAmount = 0;
-        recentOrders.forEach((order) => {
-            totalSalesAmount += order.totalPrice;
-        });
+//         let totalSalesAmount = 0;
+//         recentOrders.forEach((order) => {
+//             totalSalesAmount += order.totalPrice;
+//         });
 
-        totalSalesAmount = numeral(totalSalesAmount).format("0.0a");
+//         totalSalesAmount = numeral(totalSalesAmount).format("0.0a");
 
-        const totalSoldProducts = await Product.aggregate([
-            {
-                $group: {
-                    _id: null,
-                    total_sold_count: {
-                        $sum: "$sold",
-                    },
-                },
-            },
-        ]);
+//         const totalSoldProducts = await Product.aggregate([
+//             {
+//                 $group: {
+//                     _id: null,
+//                     total_sold_count: {
+//                         $sum: "$sold",
+//                     },
+//                 },
+//             },
+//         ]);
 
-        const totalOrderCount = await Order.countDocuments();
-        const totalActiveUserCount = await User.countDocuments({ isBlock: false });
+//         const totalOrderCount = await Order.countDocuments();
+//         const totalActiveUserCount = await User.countDocuments({ isBlock: false });
 
-        res.render("admin/pages/dashboard", {
-            title: "Dashboard",
-            user,
-            messages,
-            recentOrders,
-            totalOrderCount,
-            totalActiveUserCount,
-            totalSalesAmount,
-            moment,
-            totalSoldProducts: totalSoldProducts[0].total_sold_count,
-        });
-    } catch (error) {
-        throw new Error(error);
-    }
-});
+//         res.render("admin/pages/dashboard", {
+//             title: "Dashboard",
+//             user,
+//             messages,
+//             recentOrders,
+//             totalOrderCount,
+//             totalActiveUserCount,
+//             totalSalesAmount,
+//             moment,
+//             totalSoldProducts: totalSoldProducts[0].total_sold_count,
+//         });
+//     } catch (error) {
+//         throw new Error(error);
+//     }
+// });
 
 
 
@@ -464,5 +464,5 @@ module.exports = {
     getSalesData,
     salesReportpage,
     generateSalesReport,
-    dashboardpage
+    // dashboardpage
 }
