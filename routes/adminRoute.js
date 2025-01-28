@@ -50,7 +50,7 @@ adminRoute.get('/logout', isAdminLoggedIn, adminController.logout)
 
 
 
-// adminRoute.get("/dashboard",isAdminLoggedIn, adminController.dashboardpage);
+adminRoute.get("/dashboard",isAdminLoggedIn, adminController.dashboardpage);
 
 adminRoute.get('/user', isAdminLoggedIn, adminController.userManagement)
 adminRoute.post('/user/search', isAdminLoggedIn, adminController.searchUser)
